@@ -7,7 +7,7 @@ class LoginController extends GetxController {
   TextEditingController phoneController = TextEditingController(); // TextEditingController for phone input
 
   // Dummy phone number for successful login
-  final String validPhoneNumber = '+6281234567890';
+  final String validPhoneNumber = '+62123';
 
   // Method to handle login
   void login() {
