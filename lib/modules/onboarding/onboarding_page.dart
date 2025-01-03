@@ -1,4 +1,6 @@
 import 'package:cots_destu/design_system/color.dart';
+import 'package:cots_destu/modules/onboarding/login_page.dart';
+import 'package:cots_destu/modules/onboarding/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart'; // Import GetX package
 
@@ -14,38 +16,51 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: PageView(
-              controller: _pageController,
-              onPageChanged: (index) {
-                setState(() {
-                  _currentPage = index; // Update current page when swipe occurs
-                });
-              },
-              children: [
-                buildOnboardingSlide(
-                  "assets/images/onboarding_1.png",
-                  "Selamat datang di Gojek!",
-                  "Aplikasi yang bikin hidupmu lebih nyaman. Siap bantuin semua kebutuhan mu, kapanpun, dan di manapun",
-                ),
-                buildOnboardingSlide(
-                  "assets/images/onboarding_2.png",
-                  "Lorem Ipsum Dolor Sit Amet",
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                ),
-                buildOnboardingSlide(
-                  "assets/images/onboarding_3.png",
-                  "Lorem Ipsum Dolor Sit Amet",
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                ),
-              ],
-            ),
+      appBar: AppBar(
+        backgroundColor: Colors.white, // Background color of the app bar
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0), // You can adjust padding to fit your needs
+          child: Image.asset(
+            'images/logo.png', // Path to your PNG logo
+            height: 0, // Set the height to match the desired size
           ),
-          buildDotIndicator(),
-          buildBottomNavigation(),
-        ],
+        ),
+      ),
+      body: Container(
+        color: AppColors.white,
+        child: Column(
+          children: [
+            Expanded(
+              child: PageView(
+                controller: _pageController,
+                onPageChanged: (index) {
+                  setState(() {
+                    _currentPage = index; // Update current page when swipe occurs
+                  });
+                },
+                children: [
+                  buildOnboardingSlide(
+                    "assets/images/onboarding_1.png",
+                    "Selamat datang di Gojek!",
+                    "Aplikasi yang bikin hidupmu lebih nyaman. Siap bantuin semua kebutuhan mu, kapanpun, dan di manapun",
+                  ),
+                  buildOnboardingSlide(
+                    "assets/images/onboarding_2.png",
+                    "Lorem Ipsum Dolor Sit Amet",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                  ),
+                  buildOnboardingSlide(
+                    "assets/images/onboarding_3.png",
+                    "Lorem Ipsum Dolor Sit Amet",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                  ),
+                ],
+              ),
+            ),
+            buildDotIndicator(),
+            buildBottomNavigation(),
+          ],
+        ),
       ),
     );
   }
@@ -93,8 +108,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 Get.to(LoginPage());
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors
-                    .primaryGreen, // Set the button color to primary green
+                backgroundColor: AppColors.primaryGreen,
+                foregroundColor: AppColors
+                    .white, // Text color white // Set the button color to primary green
               ),
               child: Text("Masuk"),
             ),
@@ -107,6 +123,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 // Navigate to Register page
                 Get.to(RegisterPage());
               },
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: AppColors.primaryGreen), // Green border
+                backgroundColor: AppColors.white,
+                foregroundColor: AppColors
+                    .primaryGreen // Text color white
+              ),
               child: Text("Belum ada akun?, Daftar dulu"),
             ),
           ),
@@ -139,42 +161,3 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 }
 
-class LoginPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Login', style: TextStyle(fontFamily: 'SFProText')),
-      ),
-      body: Center(
-        child: Text(
-          'Login Page',
-          style: TextStyle(
-              fontFamily: 'SFProText',
-              fontWeight: FontWeight.w500,
-              fontSize: 22),
-        ),
-      ),
-    );
-  }
-}
-
-class RegisterPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Register', style: TextStyle(fontFamily: 'SFProText')),
-      ),
-      body: Center(
-        child: Text(
-          'Register Page',
-          style: TextStyle(
-              fontFamily: 'SFProText',
-              fontWeight: FontWeight.w500,
-              fontSize: 22),
-        ),
-      ),
-    );
-  }
-}
